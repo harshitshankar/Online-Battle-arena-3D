@@ -1,4 +1,8 @@
-const socket = io();
+// Auto-detect: use online server if installed as APK, local for development
+const SERVER_URL = window.location.protocol === 'file:'
+  ? 'https://online-battle-arena-3d.onrender.com'
+  : window.location.origin;
+const socket = io(SERVER_URL);
 let scene, camera, renderer, myId, myRoom;
 const players = {};
 const bullets = [];
