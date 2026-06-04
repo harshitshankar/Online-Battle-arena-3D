@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Battle Arena 3D</title>
+  <link rel="stylesheet" href="/style.css?v=14">
+</head>
+<body>
+  <div id="menu">
+    <h1>⚔️ BATTLE ARENA 3D</h1>
+
+    <!-- Big headphone notice at top -->
+    <div id="headphoneNotice">
+      🎧 <strong>USE HEADPHONES / EARPHONES</strong> 🎧<br>
+      <small>For zero voice issues and crystal-clear audio!</small>
+    </div>
+
+    <input id="nameInput" placeholder="Your Name" maxlength="12">
+
+    <label class="color-label">
+      Character Color:
+      <input id="colorInput" type="color" value="#ff4444">
+    </label>
+
+    <div class="room-section">
+      <input id="roomInput" placeholder="Room Code" maxlength="10">
+      <button id="randomRoomBtn" type="button">🎲</button>
+    </div>
+
+    <label class="voice-toggle">
+      <input type="checkbox" id="voiceEnabled" checked> 🎤 Enable Voice Chat
+    </label>
+
+    <div class="map-selector">
+      <h3>Select Map:</h3>
+      <div class="map-grid">
+        <div class="map-card" data-map="desert">🏜️<br>Desert</div>
+        <div class="map-card" data-map="snow">❄️<br>Snow</div>
+        <div class="map-card" data-map="city">🌆<br>City</div>
+        <div class="map-card" data-map="forest">🌲<br>Forest</div>
+        <div class="map-card" data-map="warehouse">🏭<br>Warehouse</div>
+        <div class="map-card" data-map="custom">🎨<br>Custom</div>
+      </div>
+    </div>
+
+    <button id="joinBtn">🎮 JOIN / CREATE ROOM</button>
+    <p class="hint">Share Room Code + Link with friends to play together!</p>
+  </div>
+
+  <div id="game" style="display:none;">
+    <div id="crosshair">+</div>
+    <div id="hud">
+      <div id="healthBar" title="Health"><div id="healthFill"></div><span id="healthText">150</span></div>
+      <div id="armorBar" title="Armor"><div id="armorFill"></div><span id="armorText">0</span></div>
+      <div id="ammoDisplay">🔫 <span id="ammoText">30</span> / <span id="reserveText">90</span></div>
+      <div id="stats">K: <span id="kills">0</span> | D: <span id="deaths">0</span></div>
+    </div>
+    <div id="roomDisplay"></div>
+    <div id="notifications"></div>
+    <div id="scoreboard"><h3>Players</h3><ul id="playerList"></ul></div>
+    <div id="deathScreen" style="display:none;">YOU DIED<br><small>Respawning...</small></div>
+<div id="reloadPrompt" style="display:none;">
+  🔫 OUT OF AMMO!<br>
+  <span class="reload-text">Press <strong>R</strong> or tap <strong>🔄</strong> to RELOAD</span>
+</div>    
+<div id="mapName"></div>
+    <div id="micStatus">🎤 OFF</div>
+    <div id="mapLocked" style="display:none;">🔒 Map Locked</div>
+
+    <button id="helpBtn" title="Show Controls (H)">❓</button>
+    <button id="buildBtn" title="Builder Mode (B)" style="display:none;">🎨</button>
+    <button id="leaveBtn" title="Leave Game">🚪</button>
+
+    <div id="controlsPanel">
+      <h3>🎮 KEYBOARD CONTROLS</h3>
+      <div class="ctrl-grid">
+        <div class="ctrl-row"><span class="key">W A S D</span><span>Move</span></div>
+        <div class="ctrl-row"><span class="key">MOUSE</span><span>Look around</span></div>
+        <div class="ctrl-row"><span class="key">CLICK</span><span>Shoot</span></div>
+        <div class="ctrl-row"><span class="key">SPACE</span><span>Jump</span></div>
+        <div class="ctrl-row"><span class="key">R</span><span>Reload</span></div>
+        <div class="ctrl-row"><span class="key">U</span><span>Unstuck</span></div>
+        <div class="ctrl-row"><span class="key">M</span><span>Change Map</span></div>
+        <div class="ctrl-row"><span class="key">V</span><span>Toggle Voice Mic</span></div>
+        <div class="ctrl-row"><span class="key">B</span><span>Builder Mode (Custom map)</span></div>
+        <div class="ctrl-row"><span class="key">H</span><span>Show / Hide this menu</span></div>
+      </div>
+      <p class="ctrl-hint">🛡️ Armor BLOCKS 100% damage until it breaks!</p>
+      <p class="ctrl-hint">🎨 Builder: Q=Rotate | Click=Place | Z=Undo | X=Clear</p>
+      <p class="ctrl-hint">🎧 Use HEADPHONES for best voice quality!</p>
+      <p class="ctrl-hint">🩹 RED = Health | 🛡️ BLUE = Armor | 🔫 YELLOW = Ammo</p>
+      <button id="closeHelp">Close (H)</button>
+    </div>
+
+    <div id="leaveDialog">
+      <h3>🚪 Leave Game?</h3>
+      <p>Are you sure you want to leave the room?</p>
+      <div class="dialog-btns">
+        <button id="confirmLeave">Yes, Leave</button>
+        <button id="cancelLeave">Cancel</button>
+      </div>
+    </div>
+
+    <div id="builderPanel" style="display:none;">
+      <h3>🎨 MAP BUILDER</h3>
+      <div id="pieceGrid"></div>
+      <div class="builder-btns">
+        <button onclick="rotatePreview()">🔄 Rotate</button>
+        <button onclick="undoLastPiece()">↩️ Undo</button>
+        <button onclick="clearAllCustom()">🗑️ Clear</button>
+        <button onclick="toggleBuilder()">✅ Done</button>
+      </div>
+      <p class="builder-hint">📱 Look around then tap PLACE button to build!</p>
+    </div>
+
+    <button id="btnPlace" style="display:none;">📍 PLACE</button>
+
+    <div id="mobileControls" style="display:none;">
+      <div id="joystick">
+        <div id="joystickKnob"></div>
+      </div>
+      <div id="lookArea"></div>
+      <div id="mobileBtns">
+        <button id="btnJump" class="mbtn">⤴</button>
+        <button id="btnShoot" class="mbtn shoot">🔫</button>
+        <button id="btnReload" class="mbtn">🔄</button>
+        <button id="btnUnstuck" class="mbtn small">✨</button>
+        <button id="btnMap" class="mbtn small">🗺️</button>
+        <button id="btnMic" class="mbtn small">🎤</button>
+        <button id="btnBuild" class="mbtn small">🎨</button>
+      </div>
+    </div>
+
+    <div id="mapMenu" style="display:none;">
+      <h2>Change Map</h2>
+      <div class="map-grid">
+        <div class="map-card" data-map="desert">🏜️<br>Desert</div>
+        <div class="map-card" data-map="snow">❄️<br>Snow</div>
+        <div class="map-card" data-map="city">🌆<br>City</div>
+        <div class="map-card" data-map="forest">🌲<br>Forest</div>
+        <div class="map-card" data-map="warehouse">🏭<br>Warehouse</div>
+        <div class="map-card" data-map="custom">🎨<br>Custom</div>
+      </div>
+      <button id="closeMapMenu">Close</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="sounds.js?v=14"></script>
+  <script src="character.js?v=14"></script>
+  <script src="maps.js?v=14"></script>
+  <script src="voice.js?v=14"></script>
+  <script src="controls.js?v=14"></script>
+  <script src="builder.js?v=14"></script>
+  <script src="game.js?v=14"></script>
+</body>
+</html>
