@@ -1229,3 +1229,37 @@ html, body {
     font-size: 15px;
   }
 }
+
+@media screen and (max-width:900px){
+
+  #joystick{
+      width:90px;
+      height:90px;
+
+      left:10px;
+      bottom:35px;
+  }
+
+  #joystickKnob{
+      width:38px;
+      height:38px;
+  }
+
+  #hud{
+      left:10px;
+      bottom:150px;
+      transform:scale(.85);
+      transform-origin:left bottom;
+  }
+
+}
+
+@media screen and (max-width:900px){
+
+  #scoreboard{
+      min-width:100px;
+      max-width:120px;
+      font-size:10px;
+  }
+
+}
