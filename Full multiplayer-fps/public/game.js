@@ -332,6 +332,13 @@ function checkPickups() {
 }
 
 socket.on('init', (data) => {
+  const me = data.players[data.id];
+
+document.getElementById('kills').textContent =
+  me.kills || 0;
+
+document.getElementById('deaths').textContent =
+  me.deaths || 0;
   myId = data.id; myRoom = data.room;
   document.getElementById('roomDisplay').textContent = '🏠 Room: ' + data.room;
   if (data.map) loadMap(data.map);
