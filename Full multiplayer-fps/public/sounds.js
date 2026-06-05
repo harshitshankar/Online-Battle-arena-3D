@@ -44,7 +44,7 @@ function noiseBurst(duration, volume) {
 // 🔫 Gunshot — loud and punchy
 function soundShoot() {
   initAudio();
-  playTone(400, 0.18, 'square', 0.5, -120);
+  playTone(400, 0.18, 'square', 0.8, -120);
   playTone(90, 0.15, 'sawtooth', 0.35, -50);
   noiseBurst(0.12, 0.5);
 }
@@ -52,14 +52,14 @@ function soundShoot() {
 // 💥 Hit — sharp impact
 function soundHit() {
   initAudio();
-  playTone(300, 0.2, 'sawtooth', 0.5, -200);
+  playTone(300, 0.2, 'sawtooth', 0.8, -200);
   noiseBurst(0.08, 0.4);
 }
 
 // ☠️ Death — dramatic
 function soundDeath() {
   initAudio();
-  playTone(400, 0.6, 'sawtooth', 0.6, -350);
+  playTone(400, 0.6, 'sawtooth', 0.8, -350);
   setTimeout(() => playTone(200, 0.5, 'square', 0.5, -150), 100);
   setTimeout(() => playTone(100, 0.4, 'sawtooth', 0.4, -80), 300);
   noiseBurst(0.3, 0.5);
@@ -68,7 +68,7 @@ function soundDeath() {
 // 🎯 Kill — satisfying ding
 function soundKill() {
   initAudio();
-  playTone(600, 0.15, 'sine', 0.5, 200);
+  playTone(600, 0.15, 'sine', 0.8, 200);
   setTimeout(() => playTone(900, 0.2, 'sine', 0.5, 100), 80);
   setTimeout(() => playTone(1200, 0.15, 'sine', 0.4, 50), 180);
 }
@@ -76,7 +76,7 @@ function soundKill() {
 // 🔔 Player joins
 function soundJoin() {
   initAudio();
-  playTone(500, 0.15, 'sine', 0.4, 200);
+  playTone(500, 0.15, 'sine', 0.8, 200);
   setTimeout(() => playTone(700, 0.18, 'sine', 0.4, 100), 100);
   setTimeout(() => playTone(900, 0.12, 'sine', 0.35, 50), 200);
 }
@@ -84,6 +84,6 @@ function soundJoin() {
 // 👋 Player leaves
 function soundLeave() {
   initAudio();
-  playTone(500, 0.15, 'sine', 0.4, -200);
+  playTone(500, 0.15, 'sine', 0.7, -200);
   setTimeout(() => playTone(300, 0.2, 'sine', 0.35, -100), 100);
 }
