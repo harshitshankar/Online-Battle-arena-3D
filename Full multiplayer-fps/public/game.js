@@ -421,7 +421,7 @@ socket.on('pickupRespawn', (pickup) => {
   const pk = pickups.find(p => p.id === pickup.id);
   if (pk && pk.mesh) { pk.mesh.visible = true; pk.active = true; }
 });
-socket.on('playerKilled', (d) => {
+/*socket.on('playerKilled', (d) => {
   if (d.targetId === myId) {
     myHealth = 150; myArmor = 0; myAmmo = 30; myReserve = 90;
     camera.position.set(d.newPos.x, d.newPos.y, d.newPos.z);
@@ -430,6 +430,48 @@ socket.on('playerKilled', (d) => {
     players[d.targetId].mesh.position.set(d.newPos.x, d.newPos.y - 2, d.newPos.z);
   }
   if (d.killerId === myId) soundKill();
+}); */
+socket.on('playerKilled', (d) => {
+
+  // Update my kill count
+  if (d.killerId === myId) {
+    document.getElementById('kills').textContent =
+      d.killerKills;
+
+    soundKill();
+  }
+
+  // Update my death count
+  if (d.targetId === myId) {
+    document.getElementById('deaths').textContent =
+      d.victimDeaths;
+
+    myHealth = 150;
+    myArmor = 0;
+    myAmmo = 30;
+    myReserve = 90;
+
+    camera.position.set(
+      d.newPos.x,
+      d.newPos.y,
+      d.newPos.z
+    );
+
+    updateHealthUI();
+    updateAmmoUI();
+
+    showDeath();
+    soundDeath();
+  }
+
+  // Move respawned player
+  if (players[d.targetId]) {
+    players[d.targetId].mesh.position.set(
+      d.newPos.x,
+      d.newPos.y - 2,
+      d.newPos.z
+    );
+  }
 });
 socket.on('notification', showNotification);
 socket.on('bulletFired', (d) => spawnBullet(d.origin, d.dir, d.id));
