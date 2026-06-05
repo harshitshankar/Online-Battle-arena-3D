@@ -1004,3 +1004,228 @@ html, body {
     font-size: 13px;
   }
 }
+
+
+/* ==========================================
+   MOBILE UI FIX PACK v1
+   Paste at END of style.css
+========================================== */
+
+@media screen and (max-width: 900px) {
+
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* HUD */
+
+  #hud {
+    left: 10px;
+    bottom: 130px;
+    transform: scale(0.9);
+    transform-origin: left bottom;
+  }
+
+  #healthBar,
+  #armorBar {
+    width: 180px;
+  }
+
+  #ammoDisplay,
+  #stats {
+    font-size: 14px;
+  }
+
+  /* Scoreboard */
+
+  #scoreboard {
+    top: 10px;
+    left: 10px;
+    min-width: 120px;
+    max-width: 140px;
+    padding: 8px;
+    font-size: 11px;
+  }
+
+  #scoreboard h3 {
+    font-size: 13px;
+  }
+
+  /* Room Code */
+
+  #roomDisplay {
+    top: 10px;
+    max-width: 65vw;
+    font-size: 13px;
+    padding: 6px 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Map Name */
+
+  #mapName {
+    right: 10px;
+    bottom: 95px;
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  /* Notifications */
+
+  #notifications {
+    width: 180px;
+    right: 10px;
+    top: 210px;
+  }
+
+  .notif {
+    font-size: 11px;
+    padding: 7px 10px;
+  }
+
+  /* Hide duplicate mic status */
+
+  #micStatus {
+    display: none;
+  }
+
+  /* Top Right Buttons */
+
+  #helpBtn,
+  #leaveBtn,
+  #buildBtn {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+
+  #helpBtn {
+    top: 10px;
+    right: 10px;
+  }
+
+  #leaveBtn {
+    top: 60px;
+    right: 10px;
+  }
+
+  #buildBtn {
+    top: 110px;
+    right: 10px;
+  }
+
+  /* Joystick */
+
+  #joystick {
+    width: 95px;
+    height: 95px;
+    left: 15px;
+    bottom: 90px;
+  }
+
+  #joystickKnob {
+    width: 42px;
+    height: 42px;
+  }
+
+  /* Mobile Buttons */
+
+  #mobileBtns {
+    right: 10px;
+    bottom: 10px;
+    gap: 10px;
+  }
+
+  .mbtn {
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+  }
+
+  .mbtn.small {
+    width: 42px;
+    height: 42px;
+    font-size: 13px;
+  }
+
+  .mbtn.shoot {
+    width: 70px;
+    height: 70px;
+    font-size: 24px;
+  }
+
+  /* Builder */
+
+  #builderPanel {
+    width: 95%;
+    bottom: 120px;
+    padding: 10px;
+  }
+
+  #pieceGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #btnPlace {
+    bottom: 180px;
+    font-size: 18px;
+    padding: 14px 24px;
+  }
+
+  /* Controls Panel */
+
+  #controlsPanel {
+    width: 95%;
+    min-width: auto;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 15px;
+  }
+
+  #controlsPanel h3 {
+    font-size: 18px;
+  }
+
+  .ctrl-row {
+    font-size: 13px;
+  }
+
+  .key {
+    min-width: 60px;
+    font-size: 11px;
+  }
+
+  /* Reload Prompt */
+
+  #reloadPrompt {
+    width: 85%;
+    max-width: 300px;
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  .reload-text {
+    font-size: 12px;
+  }
+
+  /* Death Screen */
+
+  #deathScreen {
+    font-size: 34px;
+  }
+
+  /* Menu */
+
+  .map-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .map-card {
+    width: 100%;
+    min-height: 80px;
+    font-size: 15px;
+  }
+}
