@@ -174,11 +174,32 @@ io.on('connection', (socket) => {
         target.x=spawn.x; target.y=spawn.y; target.z=spawn.z;
         target.health=target.maxHealth; target.armor=0;
         target.ammo=target.maxAmmo; target.reserveAmmo=90;
-        io.to(room).emit('playerKilled', {
+       /* io.to(room).emit('playerKilled', {
           killer:shooter.name, victim:target.name, targetId:target.id,
           killerId:shooter.id, headshot:data.headshot,
           newPos:{x:target.x,y:target.y,z:target.z}
-        });
+        }); */
+        io.to(room).emit('playerKilled', {
+  killer: shooter.name,
+  victim: target.name,
+
+  targetId: target.id,
+  killerId: shooter.id,
+
+  killerKills: shooter.kills,
+  killerDeaths: shooter.deaths,
+
+  victimKills: target.kills,
+  victimDeaths: target.deaths,
+
+  headshot: data.headshot,
+
+  newPos: {
+    x: target.x,
+    y: target.y,
+    z: target.z
+  }
+});
         io.to(room).emit('notification', {
           type:'kill',
           msg: data.headshot ? `🎯 ${shooter.name} HEADSHOT ${target.name}!`
