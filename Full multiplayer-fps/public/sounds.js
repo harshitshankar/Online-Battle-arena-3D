@@ -44,7 +44,7 @@ function noiseBurst(duration, volume) {
 // 🔫 Gunshot — loud and punchy
 function soundShoot() {
   initAudio();
-  playTone(180, 0.18, 'square', 0.45, -120);
+  playTone(400, 0.18, 'square', 0.5, -120);
   playTone(90, 0.15, 'sawtooth', 0.35, -50);
   noiseBurst(0.12, 0.5);
 }
